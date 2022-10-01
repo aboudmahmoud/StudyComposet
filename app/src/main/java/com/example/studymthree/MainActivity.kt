@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 
@@ -38,13 +39,13 @@ fun Greeting() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         Box(
             modifier = Modifier
-                .background(Color.Blue), contentAlignment = Alignment.Center
+                .background(Color.Blue),
 
         ) {
             Box(
                 modifier = Modifier
                     .height(50.dp)
-                    .width(50.dp)
+                    .width(50.dp).align(Alignment.CenterEnd)
                     .background(Color.Green)
             )
             Text(text = "We Love The King Aboud", fontSize = 15.sp)
