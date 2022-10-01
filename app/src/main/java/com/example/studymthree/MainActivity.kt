@@ -4,7 +4,10 @@ package com.example.studymthree
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.studymthree.ui.theme.StudymthreeTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,64 +27,34 @@ class MainActivity : ComponentActivity() {
         setContent {
             StudymthreeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                Greeting()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Composable
-fun ColumnScope.CoustemItem(weightValue:Float,color: Color) {
-    Surface(
-        modifier = Modifier
-            .width(200.dp)
-            .height(50.dp)
-            .weight(weightValue),
-        color =color
-    ) {
-
+fun Greeting() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+        Box(
+            modifier = Modifier
+                .background(Color.Blue)
+                .width(100.dp)
+                .height(100.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+Text(text = "We Love The King Aboud", fontSize = 40.sp)
+        }
     }
+
 }
+
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     StudymthreeTheme {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.End,
-
-        ) {
-            CoustemItem(3f,
-                MaterialTheme.colorScheme.secondary)
-            Surface(
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(50.dp)
-                    .weight(1f),
-                color = MaterialTheme.colorScheme.primary
-            ) {
-
-            }
-            Surface(
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(50.dp)
-                    .weight(1f),
-                color = MaterialTheme.colorScheme.secondaryContainer
-            ) {
-
-            }
-        }
+        Greeting()
 
     }
 }
