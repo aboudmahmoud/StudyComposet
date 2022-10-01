@@ -38,12 +38,16 @@ fun Greeting() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         Box(
             modifier = Modifier
-                .background(Color.Blue)
-                .width(100.dp)
-                .height(100.dp)
-                .verticalScroll(rememberScrollState())
+                .background(Color.Blue), contentAlignment = Alignment.Center
+
         ) {
-Text(text = "We Love The King Aboud", fontSize = 40.sp)
+            Box(
+                modifier = Modifier
+                    .height(50.dp)
+                    .width(50.dp)
+                    .background(Color.Green)
+            )
+            Text(text = "We Love The King Aboud", fontSize = 15.sp)
         }
     }
 
