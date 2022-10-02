@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             StudymthreeTheme {
                 // A surface container using the 'background' color from the theme
-                Greeting()
+                ExtandCostemcard()
             }
         }
     }
@@ -109,7 +109,7 @@ fun SubScripetText(
 @Composable
 fun DefaultPreview() {
     StudymthreeTheme {
-        Greeting()
+        ExtandCostemcard()
 
     }
 }
