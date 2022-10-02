@@ -20,9 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,46 +44,67 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun Greeting() {
-    SelectionContainer() {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Text(
-            text = stringResource(R.string.android),
-            modifier = Modifier
-                .background(Color.Green)
-                .padding(16.dp)
-                .width(200.dp)
-                .background(Color.Red),
-            color = Color.White,
-            fontSize = MaterialTheme.typography.headlineMedium.fontSize,
-            fontStyle = FontStyle.Italic,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.End
-        )
-
-            Text(
-                text = stringResource(R.string.android),
-
-                )
-            DisableSelection {
-                Text(
-                    text = stringResource(R.string.android),
-
-                    )
-            }
-
-            Text(
-                text = stringResource(R.string.android),
-
-                )
-        }
-
-    }
-
+    ColumnTexts()
 }
 
+@Composable
+fun ColumnTexts() {
+    Column() {
+        SuperScripetText("1","2")
+        SubScripetText("2","1")
+    }
+}
+@Composable
+fun SuperScripetText(
+    normalText: String,
+    superText: String,
+) {
+    Text(buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                fontSize = MaterialTheme.typography.labelMedium.fontSize
+            )
+        ) {
+            append(normalText)
+        }
 
+        withStyle( style = SpanStyle(
+            fontSize = MaterialTheme.typography.labelSmall.fontSize,
+            fontWeight = FontWeight.Normal,
+            baselineShift = BaselineShift.Superscript
+        )
+        ){
+            append(superText)
+        }
+    })
+}
+@Composable
+fun SubScripetText(
+    normalText: String,
+    SubText: String,
+) {
+    Text(buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                fontSize = MaterialTheme.typography.labelMedium.fontSize
+            )
+        ) {
+            append(normalText)
+        }
+
+        withStyle( style = SpanStyle(
+            fontSize = MaterialTheme.typography.labelSmall.fontSize,
+            fontWeight = FontWeight.Normal,
+            baselineShift = BaselineShift.Subscript
+        )
+        ){
+            append(SubText)
+        }
+    })
+}
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
