@@ -49,36 +49,7 @@ fun Greeting() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        var Text by remember {
-            mutableStateOf("")
-        }
-        TextField(
-            value = Text,
-            placeholder = {
-                Text(text = "Enatr ur email")
-            },
-            onValueChange = { newText ->
-                Text = newText
-
-            },
-            label = {
-                Text("Label")
-            },
-            leadingIcon = {
-                IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Filled.Email, contentDescription = "")
-                }
-            },
-            trailingIcon = {
-                IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Filled.Check, contentDescription = "")
-                }
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Go
-            ),
-        )
+        GoogleButton()
     }
 }
 
