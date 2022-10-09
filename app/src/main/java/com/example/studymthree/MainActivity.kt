@@ -2,10 +2,14 @@ package com.example.studymthree
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 
 import androidx.compose.foundation.text.KeyboardOptions
@@ -25,6 +29,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -39,69 +44,75 @@ import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
+import com.example.studymthree.Resportroy.Resportory
 
 import com.example.studymthree.ui.theme.StudymthreeTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             StudymthreeTheme {
-                // A surface container using the 'background' color from the theme
-                Greeting()
+                //frist and Scend
+                val resportory = Resportory()
+                val getAllData = resportory.getALlPessonsData()
+
+                //Thrid
+
+                val sections = listOf(
+                    "A","B","C","D","E","F","G"
+                )
+                LazyColumn(
+                    contentPadding = PaddingValues(all=12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    //Frsist Way
+                  /*  items(items = getAllData) {
+                        CoustemItem(person = it)
+                    }*/
+
+                    //Scend way
+                  /*  itemsIndexed(items = getAllData,
+                    ) {
+                            index,it ->
+                        Log.d("Aboud", "onCreate: ${index} ")
+                        CoustemItem(person = it)
+                    }*/
+                    //thrid way
+                    sections.forEach{
+                        section->
+                        stickyHeader {
+                            Text(  modifier = Modifier.fillMaxWidth()
+                                .background(Color.LightGray)
+                                .padding(12.dp),text = "Section ${section}"
+                            )
+                        }
+                        items(10){
+                            Text(
+                                modifier = Modifier.padding(12.dp),
+                            text="Item $it from the section ${section}"
+                            )
+                        }
+                    }
+                }
             }
         }
     }
-}
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Greeting() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        var password by rememberSaveable {
-            mutableStateOf("")
-        }
-        var PaasswordStates by remember{
-            mutableStateOf(false)
-        }
+    @Composable
+    fun Greeting() {
 
-        val icones=if(PaasswordStates)painterResource(id = R.drawable.passwordvispel)
-        else painterResource(id = R.drawable.passworddisaple)
-
-        OutlinedTextField(value = password, onValueChange = {
-            password = it
-        },
-            placeholder = { Text(text = "Password") },
-            label = { Text("Password") },
-            trailingIcon = {
-                IconButton(onClick = { PaasswordStates=!PaasswordStates}) {
-                    Icon(
-                        painter = icones,
-                        contentDescription = "password visible",
-
-                    )
-                }
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType =  KeyboardType.NumberPassword
-            ),
-            visualTransformation = if(PaasswordStates) VisualTransformation.None
-        else PasswordVisualTransformation()
-        )
     }
-}
 
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    StudymthreeTheme {
-        Greeting()
+    @Preview(showBackground = true)
+    @Composable
+    fun DefaultPreview() {
+        StudymthreeTheme {
+            Greeting()
 
+        }
     }
 }

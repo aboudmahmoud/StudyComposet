@@ -62,7 +62,7 @@ fun StudymthreeTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = Typography1,
         content = content
     )
 }
