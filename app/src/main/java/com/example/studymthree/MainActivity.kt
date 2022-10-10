@@ -44,7 +44,7 @@ import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
-import com.example.studymthree.Resportroy.Resportory
+
 
 import com.example.studymthree.ui.theme.StudymthreeTheme
 
@@ -54,49 +54,35 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             StudymthreeTheme {
-                //frist and Scend
-                val resportory = Resportory()
-                val getAllData = resportory.getALlPessonsData()
 
-                //Thrid
-
-                val sections = listOf(
-                    "A","B","C","D","E","F","G"
-                )
-                LazyColumn(
-                    contentPadding = PaddingValues(all=12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    //Frsist Way
-                  /*  items(items = getAllData) {
-                        CoustemItem(person = it)
-                    }*/
-
-                    //Scend way
-                  /*  itemsIndexed(items = getAllData,
-                    ) {
-                            index,it ->
-                        Log.d("Aboud", "onCreate: ${index} ")
-                        CoustemItem(person = it)
-                    }*/
-                    //thrid way
-                    sections.forEach{
-                        section->
-                        stickyHeader {
-                            Text(  modifier = Modifier.fillMaxWidth()
-                                .background(Color.LightGray)
-                                .padding(12.dp),text = "Section ${section}"
-                            )
-                        }
-                        items(10){
-                            Text(
-                                modifier = Modifier.padding(12.dp),
-                            text="Item $it from the section ${section}"
-                            )
-                        }
-                    }
-                }
+                MyComposable()
             }
+        }
+    }
+
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun MyComposable() {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            var name by remember{
+                mutableStateOf("")
+            }
+            val maxChar=10
+
+            OutlinedTextField(
+                value =name,
+                onValueChange ={if(maxChar>=it.length){
+                    name = it
+                } },
+                label = {Text("name")},
+                placeholder = {Text("put ur name")},
+                maxLines = 1,
+            )
         }
     }
 
