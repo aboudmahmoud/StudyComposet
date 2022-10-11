@@ -15,7 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.TextField
+import androidx.compose.material3.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Email
@@ -44,18 +44,35 @@ import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
+import com.example.studymthree.CanverCoustem.CoustemCompent
 
 
 import com.example.studymthree.ui.theme.StudymthreeTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalFoundationApi::class)
+    @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             StudymthreeTheme {
+Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+    var value by remember {
+        mutableStateOf(0)
 
-                MyComposable()
+    }
+    CoustemCompent(indicatuerValue = value)
+    TextField(value = value.toString(), onValueChange ={
+        value =  if(it.isNotEmpty()){
+            it.toInt()
+        }else{
+            0
+        }
+
+    }, keyboardOptions = KeyboardOptions(
+        keyboardType = KeyboardType.Decimal
+    ) ,)
+}
+
             }
         }
     }
@@ -90,6 +107,13 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun Greeting() {
 
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+
+
+        }
     }
 
 
